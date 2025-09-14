@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Arfa!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: linear-gradient(135deg, #ffccff, #ccffff);
+      font-family: 'Comic Sans MS', cursive;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 60px;
+      color: #ff3399;
+      margin-top: 50px;
+      text-shadow: 2px 2px #fff;
+    }
+    h2 {
+      font-size: 30px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .balloons {
+      font-size: 50px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+    .countdown {
+      font-size: 28px;
+      margin-top: 20px;
+      color: #444;
+      background: white;
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    button {
+      padding: 15px 30px;
+      background: #ff66cc;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 22px;
+      margin-top: 30px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff3385;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday Arfa 🎂</h1>
+  <h2>Lots of love, Bro 💖</h2>
+  <p class="balloons">🎈🎈🎈</p>
+
+  <!-- Countdown Timer -->
+  <div class="countdown" id="countdown">
+    ⏳ Countdown: Loading...
+  </div>
+
+  <br>
+  <button onclick="startSurprise()">Click for a Surprise 🎁</button>
+
+  <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // 🎂 Set Arfa's Birthday Date
+    const birthday = new Date("Sep 20, 2025 00:00:00").getTime();
+
+    // Update countdown every second
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        ⏳ Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "🎂 It's Arfa's Birthday Today! 🎉";
+      }
+    }, 1000);
+
+    // 🎁 Multiple wishes
+    const wishes = [
+      "🎂 Happy Birthday Arfa (Bro)! 🎉 May your day be as amazing as you are!",
+      "🥳 Wishing you endless happiness, Bro! Enjoy your special day!",
+      "🎈 Happy Birthday, Arfa! May all your dreams come true this year!",
+      "🎁 Bro, you deserve all the love and laughter today! Happy Birthday!",
+      "🌟 Wishing you success, joy, and blessings always, Arfa! 🎂"
+    ];
+
+    // 🎉 Confetti burst loop
+    function startSurprise() {
+      let duration = 3000; // 3 seconds
+      let end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 8,
+          startVelocity: 30,
+          spread: 360,
+          origin: { x: Math.random(), y: Math.random() - 0.2 }
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+
+      // Random wish
+      const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+      alert(randomWish);
+    }
+  </script>
+</body>
+</html>
